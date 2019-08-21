@@ -26,10 +26,26 @@ final class MainViewController: UIViewController {
         calendarViewController.selectedDate = selectedDate
         present(calendarViewController, animated: true)
     }
+    
+    @IBAction func showCalendarVer2(_ sender: UIButton) {
+        let calendarVer2ViewController = storyboard?.instantiateViewController(withIdentifier: "CalendarVer2ViewController") as! CalendarVer2ViewController
+        calendarVer2ViewController.modalTransitionStyle = .crossDissolve
+        calendarVer2ViewController.modalPresentationStyle = .overCurrentContext
+        calendarVer2ViewController.delegate = self
+        calendarVer2ViewController.selectedDate = selectedDate
+        present(calendarVer2ViewController, animated: true)
+    }
 }
 
 extension MainViewController: CalendarCallback {
     func didSelectDate(date: Date) {
+        selectedDate = date
+        dateLabel.text = date.getTitleDateFC()
+    }
+}
+
+extension MainViewController: CalendarVer2Callback {
+    func didSelectDateVer2(date: Date) {
         selectedDate = date
         dateLabel.text = date.getTitleDateFC()
     }
